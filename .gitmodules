@@ -1,0 +1,3 @@
+[submodule "augeas_src/augeas"]
+	path = augeas_src/augeas
+	url = https://github.com/hercules-team/augeas

@@ -13,3 +13,7 @@ rust-version = "1.77"
 augeas_sys = { path = "../augeas_sys" }
 bitflags = "2.6.0"
 libc = "0.2.43"
+
+[features]
+bundled = ["augeas_sys/bundled"]
+default = []

@@ -1,19 +1,38 @@
+#[cfg(feature = "bundled")]
+extern crate augeas_src;
 extern crate bindgen;
+#[cfg(feature = "pkg-config")]
 extern crate pkg_config;
 
 use std::env;
-use std::path::PathBuf;
+use std::path::{PathBuf};
 
-fn main() {
+#[cfg(feature = "bundled")]
+fn build_bundled() -> Vec<String> {
+    let artifacts = augeas_src::build().expect("autotools build");
+    artifacts.print_cargo_metadata();
+    vec![artifacts.include_dir().to_str().unwrap().to_string()]
+}
+
+#[cfg(feature = "pkg-config")]
+fn build_shared() -> Vec<String> {
     let augeas = pkg_config::Config::new()
         .atleast_version("1.13.0")
         .probe("augeas")
         .unwrap();
 
-    let include_paths = augeas
+   augeas
         .include_paths
         .iter()
-        .map(|path| format!("-I{}", path.display()));
+        .map(|path| format!("-I{}", path.display())).collect()
+}
+
+fn main() {
+    #[cfg(feature = "bundled")]
+    let include_paths = build_bundled();
+
+    #[cfg(feature = "pkg-config")]
+    let include_paths = build_shared();
 
     let bindings = bindgen::Builder::default()
         .header("wrapper.h")

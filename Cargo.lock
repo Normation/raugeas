@@ -21,11 +21,28 @@ dependencies = [
 ]
 
 [[package]]
+name = "augeas_src"
+version = "0.2.0+augeas-1.14.1"
+dependencies = [
+ "autotools",
+]
+
+[[package]]
 name = "augeas_sys"
 version = "0.2.0"
 dependencies = [
+ "augeas_src",
  "bindgen",
  "pkg-config",
+]
+
+[[package]]
+name = "autotools"
+version = "0.2.7"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "ef941527c41b0fc0dd48511a8154cd5fc7e29200a0ff8b7203c5d777dbc795cf"
+dependencies = [
+ "cc",
 ]
 
 [[package]]
@@ -53,6 +70,15 @@ name = "bitflags"
 version = "2.6.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "b048fb63fd8b5923fc5aa7b340d8e156aec7ec02f0c78fa8a6ddc2613f6f71de"
+
+[[package]]
+name = "cc"
+version = "1.2.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "fd9de9f2205d5ef3fd67e685b0df337994ddd4495e2a28d185500d0e1edfea47"
+dependencies = [
+ "shlex",
+]
 
 [[package]]
 name = "cexpr"
@@ -229,6 +255,13 @@ dependencies = [
  "proc-macro2",
  "quote",
  "unicode-ident",
+]
+
+[[package]]
+name = "testcrate"
+version = "0.1.0"
+dependencies = [
+ "augeas_src",
 ]
 
 [[package]]
