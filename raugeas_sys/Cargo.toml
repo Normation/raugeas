@@ -5,7 +5,7 @@ authors = ["panicbit <panicbit.dev@gmail.com>", "Alexis Mousset <alexis.mousset@
 description = "Low level bindings for augeas"
 license = "MIT"
 keywords = ["augeas", "bindings"]
-repository = "https://github.com/amousset/rust-augeas"
+repository = "https://github.com/normation/raugeas"
 edition = "2021"
 rust-version = "1.77"
 

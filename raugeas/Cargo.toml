@@ -5,7 +5,7 @@ authors = ["panicbit <panicbit.dev@gmail.com>", "David Lutterkort <lutter@watzma
 description = "Augeas bindings for Rust"
 license = "MIT"
 keywords = ["augeas", "bindings"]
-repository = "https://github.com/amousset/rust-augeas"
+repository = "https://github.com/normation/raugeas"
 edition = "2021"
 rust-version = "1.77"
 
