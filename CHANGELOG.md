@@ -1,3 +1,19 @@
+# Changelog
+
+## 0.3.0 (2024-12-24)
+
+- Support non-UTF-8 strings ([e7db])
+- Add FromStr impl for Position ([00e2])
+- Add clear/clearm methods ([e60b])
+- Add a touch method ([5af0])
+- Use Cow for str escaping ([9526])
+
+[e7db]: https://github.com/Normation/raugeas/commit/ca2790e6ecc127a9062324f60227a907cc56e7db
+[00e2]: https://github.com/Normation/raugeas/commit/95b3c2b29d56c95049ff04868ae631677d4f00e2
+[e60b]: https://github.com/Normation/raugeas/commit/2cbd2729369f438236f4ec01214e80fcbbd2e60b
+[5af0]: https://github.com/Normation/raugeas/commit/a9e3bc7e13eecabf5494367d440aaa9ee2df5af0
+[9526]: https://github.com/Normation/raugeas/commit/c1af5cfaeea80d4a5244c5b4d3cd82938b0d9526
+
 ## 0.2.2 (2024-12-15)
 
 - Add a helper enum and method for save modes ([62f4])

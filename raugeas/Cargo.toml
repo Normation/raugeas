@@ -1,6 +1,6 @@
 [package]
 name = "raugeas"
-version = "0.2.2"
+version = "0.3.0"
 authors = ["panicbit <panicbit.dev@gmail.com>", "David Lutterkort <lutter@watzmann.net>", "Alexis Mousset <alexis.mousset@rudder.io>"]
 description = "Augeas bindings for Rust"
 license = "MIT"
