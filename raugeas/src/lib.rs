@@ -22,7 +22,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! raugeas = "0.3.0"
+//! raugeas = "0.3.1"
 //! ```
 //!
 //! ## Summary

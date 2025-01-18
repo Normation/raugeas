@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.3.1 (2025-01-18)
+
+- Fix build on ARM ([331e])
+
+[331e]: https://github.com/Normation/raugeas/commit/331e4368d0dd9e6cc191dd8904a2814658cf2de4
+
 ## 0.3.0 (2024-12-24)
 
 - Support non-UTF-8 strings ([e7db])
