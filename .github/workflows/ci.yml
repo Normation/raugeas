@@ -38,10 +38,13 @@ jobs:
 
   test:
     name: test / ${{ matrix.name }}
-    runs-on: [ubuntu-latest, ubuntu-22.04-arm]
+    runs-on: ${{ matrix.os }}
 
     strategy:
       matrix:
+        os:
+          - ubuntu-latest
+          - ubuntu-22.04-arm
         include:
           - name: stable
             rust: stable
