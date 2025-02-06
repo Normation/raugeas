@@ -1,0 +1,10 @@
+[package]
+name = "testcrate"
+version = "0.1.0"
+authors = ["Alexis Mousset <alexis.mousset@rudder.io>"]
+links = "augeas"
+build = "build.rs"
+edition = "2021"
+
+[build-dependencies]
+raugeas_src = { path = ".." }

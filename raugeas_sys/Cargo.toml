@@ -13,4 +13,13 @@ rust-version = "1.77"
 
 [build-dependencies]
 bindgen = "0.70.1"
-pkg-config = "0.3.14"
+pkg-config = { version = "0.3.14", optional = true }
+raugeas_src = { path = "../raugeas_src", optional = true }
+
+[features]
+default = ["pkg-config"]
+bundled = ["raugeas_src"]
+
+[package.metadata.docs.rs]
+no-default-features = true
+features = ["bundled"]
