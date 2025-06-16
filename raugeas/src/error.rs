@@ -198,7 +198,7 @@ impl From<ErrorCode> for Error {
     }
 }
 
-/// For some errors (at least `parse_failed`), the error contains t position in the source file
+/// For some errors (at least `parse_failed`), the error contains the position in the source file
 /// where the error occurred.
 #[derive(Clone, PartialEq, Debug)]
 pub struct ErrorPosition {

@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.0 (2025-06-16)
+
+- Mark as stable
+
 ## 0.3.1 (2025-01-18)
 
 - Fix build on ARM ([331e])

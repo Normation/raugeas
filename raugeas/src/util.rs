@@ -1,6 +1,6 @@
 use libc::c_char;
 use std::ffi::{CStr, OsStr, OsString};
-use std::intrinsics::transmute;
+use std::mem::transmute;
 use std::os::unix::prelude::OsStrExt;
 use std::{io, slice};
 
@@ -79,7 +79,7 @@ mod tests {
 
     #[test]
     fn test_ptr_to_string() {
-        let s = b"Hello, World!\0".as_ptr();
+        let s = c"Hello, World!".as_ptr();
         assert_eq!(
             ptr_to_string(s as *const _),
             Some("Hello, World!".to_string())
