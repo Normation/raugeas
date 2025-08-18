@@ -1,0 +1,13 @@
+[package]
+name = "raugeas_src"
+version = "0.2.0+augeas-1.14.1"
+authors = ["panicbit <panicbit.dev@gmail.com>", "Alexis Mousset <alexis.mousset@rudder.io>"]
+description = "Low level bindings for augeas"
+license = "MIT"
+keywords = ["augeas", "bindings"]
+repository = "https://github.com/amousset/rust-augeas"
+edition = "2021"
+rust-version = "1.77"
+
+[dependencies]
+autotools = "0.2"

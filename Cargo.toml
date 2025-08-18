@@ -3,4 +3,6 @@ resolver = "2"
 members = [
     "raugeas",
     "raugeas_sys",
+    "raugeas_src",
+    "raugeas_src/testcrate",
 ]
