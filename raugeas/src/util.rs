@@ -38,11 +38,13 @@ pub(crate) unsafe fn new_memstream(
     buf: *mut *mut c_char,
     size: *mut usize,
 ) -> Result<*mut libc::FILE> {
-    let out = libc::open_memstream(buf, size);
-    if out.is_null() {
-        return Err(io::Error::last_os_error().into());
+    unsafe {
+        let out = libc::open_memstream(buf, size);
+        if out.is_null() {
+            return Err(io::Error::last_os_error().into());
+        }
+        Ok(out)
     }
-    Ok(out)
 }
 
 pub(crate) unsafe fn read_memstream(
@@ -50,25 +52,27 @@ pub(crate) unsafe fn read_memstream(
     size: *mut usize,
     out: *mut libc::FILE,
 ) -> Result<OsString> {
-    assert!(
-        !buf.is_null() && !size.is_null() && !out.is_null(),
-        "Invalid read_memstream arguments"
-    );
-    if libc::fclose(out) != 0 {
-        return Err(io::Error::last_os_error().into());
+    unsafe {
+        assert!(
+            !buf.is_null() && !size.is_null() && !out.is_null(),
+            "Invalid read_memstream arguments"
+        );
+        if libc::fclose(out) != 0 {
+            return Err(io::Error::last_os_error().into());
+        }
+
+        // Make buffer from content + size
+        let b_slice: &[u8] = transmute(slice::from_raw_parts(*buf, *size + 1));
+        let res_out =
+            CStr::from_bytes_with_nul(b_slice).expect("Invalid buffer content from open_memstream");
+        let res_out = OsStr::from_bytes(res_out.to_bytes());
+        let res = res_out.to_os_string();
+
+        // We are responsible for freeing the buffer we got from `open_memstream`.
+        libc::free(*buf as *mut libc::c_void);
+
+        Ok(res)
     }
-
-    // Make buffer from content + size
-    let b_slice: &[u8] = transmute(slice::from_raw_parts(*buf, *size + 1));
-    let res_out =
-        CStr::from_bytes_with_nul(b_slice).expect("Invalid buffer content from open_memstream");
-    let res_out = OsStr::from_bytes(res_out.to_bytes());
-    let res = res_out.to_os_string();
-
-    // We are responsible for freeing the buffer we got from `open_memstream`.
-    libc::free(*buf as *mut libc::c_void);
-
-    Ok(res)
 }
 
 #[cfg(test)]

@@ -10,7 +10,7 @@ These crates were initially forked from [hercules-team/rust-augeas](https://gith
 ## Requirements
 
 * Augeas >= 1.13.0
-* MSRV: 1.77.0
+* MSRV: 1.89.0
 
 ## Design
 

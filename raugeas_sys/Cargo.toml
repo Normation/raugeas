@@ -6,11 +6,11 @@ description = "Low level bindings for augeas"
 license = "MIT"
 keywords = ["augeas", "bindings"]
 repository = "https://github.com/normation/raugeas"
-edition = "2021"
-rust-version = "1.77"
+edition = "2024"
+rust-version = "1.89"
 
 [dependencies]
 
 [build-dependencies]
-bindgen = "0.70.1"
-pkg-config = "0.3.14"
+bindgen = "0.72.1"
+pkg-config = "0.3.32"
