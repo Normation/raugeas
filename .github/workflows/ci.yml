@@ -52,8 +52,8 @@ jobs:
             rust: beta
           - name: nightly
             rust: nightly
-          - name: 1.77.0
-            rust: 1.77.0
+          - name: 1.89.0
+            rust: 1.89.0
 
     steps:
       - uses: actions/checkout@v4
