@@ -164,7 +164,7 @@ dependencies = [
 
 [[package]]
 name = "raugeas"
-version = "1.0.0"
+version = "1.1.0"
 dependencies = [
  "bitflags",
  "libc",
@@ -173,7 +173,7 @@ dependencies = [
 
 [[package]]
 name = "raugeas_sys"
-version = "1.0.0"
+version = "1.1.0"
 dependencies = [
  "bindgen",
  "pkg-config",

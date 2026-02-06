@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.1.0 (2026-02-06)
+
+- Update tooling and dependencies ([b452])
+   - Update MSRV to 1.89.0
+   - Bump to edition 2024
+
+[b452]: https://github.com/Normation/raugeas/commit/b452625fa862d21870248a439ab1bdf112ee747a
+
 ## 1.0.0 (2025-06-16)
 
 - Mark as stable
