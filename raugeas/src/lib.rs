@@ -49,6 +49,30 @@
 //! )?;
 //! # Ok::<(), raugeas::Error>(())
 //! ```
+//!
+//! ## Security
+//!
+//! The `path` arguments accepted by methods such as [`get`](Augeas::get),
+//! [`set`](Augeas::set), [`rm`](Augeas::rm) and [`mv`](Augeas::mv) are Augeas
+//! *path expressions*, not literal node names. Characters such as `/`, `*`,
+//! `[` and `]` have special meaning. Interpolating untrusted input directly
+//! into a path expression is therefore an injection risk: a crafted value can
+//! match or modify nodes the caller did not intend, and those changes are
+//! written to real files on [`save`](Augeas::save).
+//!
+//! When building a path from untrusted node names, escape each name with
+//! [`escape_name`](Augeas::escape_name) first:
+//!
+//! ```
+//! use raugeas::{Augeas, Flags};
+//!
+//! let aug = Augeas::init(Some("/"), "", Flags::NONE).unwrap();
+//! let untrusted = "host.example.com";
+//! let escaped = aug.escape_name(untrusted)?;
+//! let path = format!("etc/hosts/*[canonical = '{}']/ip", escaped);
+//! let _ip = aug.get(&path)?;
+//! # Ok::<(), raugeas::Error>(())
+//! ```
 
 // References for the Rust implementation:
 //
@@ -802,10 +826,11 @@ impl Augeas {
         if err == Some(ErrorCode::NoSpan) {
             return Ok(None);
         }
-        self.check_error()?;
 
         result.filename = ptr_to_os_string(filename);
         unsafe { libc::free(filename as *mut libc::c_void) };
+        self.check_error()?;
+
         Ok(Some(result))
     }
 
@@ -1071,6 +1096,8 @@ impl Augeas {
 
         let mut value: *const c_char = ptr::null_mut();
         let mut label: *const c_char = ptr::null_mut();
+        // `value` and `label` are owned by Augeas and must not be freed; only
+        // `file_path` is caller-owned.
         let mut file_path: *mut c_char = ptr::null_mut();
 
         let rc = unsafe {
@@ -1084,7 +1111,11 @@ impl Augeas {
             )
         };
         if rc < 0 {
+            unsafe { libc::free(file_path as *mut libc::c_void) };
             self.check_error()?;
+            return Err(Error::Augeas(AugeasError::new_unknown(
+                "aug_ns_attr failed without setting an error code",
+            )));
         }
 
         let attr = OsAttr {
